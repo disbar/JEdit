@@ -9,6 +9,7 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 
 public class Editor extends JFrame implements ActionListener {
@@ -112,8 +113,12 @@ public class Editor extends JFrame implements ActionListener {
 		} else if (action.equals("Paste")) {
 			textArea.paste();
 			System.out.println("pasting");
+		} else if (action.equals("About")) {
+			JOptionPane.showMessageDialog(frame, "JEdit v0.0.1 \n A text editor made in Java by @Offence", "About JEdit", JOptionPane.INFORMATION_MESSAGE);
 		} else {
-			System.out.println("what");
+			
+			//TODO Add 'Open', 'Save', 'Print'
+			
 		}
 		
 	}
