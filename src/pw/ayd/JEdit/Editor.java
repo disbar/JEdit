@@ -2,17 +2,24 @@ package pw.ayd.JEdit;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JMenuBar;
 import javax.swing.JMenu;
-import javax.swing.JTextArea;
+import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
+import javax.swing.border.EmptyBorder;
 
-public class Editor extends JFrame {
+public class Editor extends JFrame implements ActionListener {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 
 	/**
@@ -48,9 +55,6 @@ public class Editor extends JFrame {
 		JMenu mnFile = new JMenu("File");
 		menuBar.add(mnFile);
 		
-		JMenuItem mntmNew = new JMenuItem("New File");
-		mnFile.add(mntmNew);
-		
 		JMenuItem mntmOpen = new JMenuItem("Open");
 		mnFile.add(mntmOpen);
 		
@@ -85,5 +89,30 @@ public class Editor extends JFrame {
 		JTextArea textArea = new JTextArea();
 		contentPane.add(textArea, BorderLayout.CENTER);
 	}
+
+
+	public void actionPerformed(ActionEvent e) {
+		
+		String s = e.getActionCommand();
+		
+		if (s.equals("copy")) {
+			
+		} else if (s.equals("cut")) {
+			
+		} else if (s.equals("paste")) {
+			
+		} else if (s.equals("open")) {
+						
+		} else if (s.equals("print")) {
+			
+		} else if (s.equals("save")) {
+			
+		} else if (s.equals("about")) {
+				
+		}
+		
+	}
+	
+	
 
 }
