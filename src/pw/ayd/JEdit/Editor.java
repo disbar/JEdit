@@ -8,6 +8,8 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
+import javax.swing.JTextArea;
+import javax.swing.JMenuItem;
 
 public class Editor extends JFrame {
 
@@ -22,7 +24,7 @@ public class Editor extends JFrame {
 				try {
 					Editor frame = new Editor();
 					frame.setVisible(true);
-					frame.setTitle("JEdit");
+				
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -34,6 +36,9 @@ public class Editor extends JFrame {
 	 * Create the frame.
 	 */
 	public Editor() {
+		
+		setTitle("JEdit");
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		
@@ -43,8 +48,32 @@ public class Editor extends JFrame {
 		JMenu mnFile = new JMenu("File");
 		menuBar.add(mnFile);
 		
+		JMenuItem mntmNew = new JMenuItem("New File");
+		mnFile.add(mntmNew);
+		
+		JMenuItem mntmOpen = new JMenuItem("Open");
+		mnFile.add(mntmOpen);
+		
+		JMenuItem mntmSave = new JMenuItem("Save");
+		mnFile.add(mntmSave);
+		
+		JMenuItem mntmPrint = new JMenuItem("Print");
+		mnFile.add(mntmPrint);
+		
 		JMenu mnEdit = new JMenu("Edit");
 		menuBar.add(mnEdit);
+		
+		JMenuItem mntmCopy = new JMenuItem("Copy (Ctrl + C)");
+		mnEdit.add(mntmCopy);
+		
+		JMenuItem mntmCut = new JMenuItem("Cut (Ctrl + X)");
+		mnEdit.add(mntmCut);
+		
+		JMenuItem mntmPastectrl = new JMenuItem("Paste (Ctrl + V)");
+		mnEdit.add(mntmPastectrl);
+		
+		JMenuItem menuItem = new JMenuItem("New menu item");
+		mnEdit.add(menuItem);
 		
 		JMenu mnHelp = new JMenu("Help");
 		menuBar.add(mnHelp);
@@ -52,6 +81,9 @@ public class Editor extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
+		
+		JTextArea textArea = new JTextArea();
+		contentPane.add(textArea, BorderLayout.CENTER);
 	}
 
 }
