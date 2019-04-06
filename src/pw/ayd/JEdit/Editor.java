@@ -69,14 +69,14 @@ public class Editor extends JFrame {
 		JMenuItem mntmCut = new JMenuItem("Cut (Ctrl + X)");
 		mnEdit.add(mntmCut);
 		
-		JMenuItem mntmPastectrl = new JMenuItem("Paste (Ctrl + V)");
-		mnEdit.add(mntmPastectrl);
-		
-		JMenuItem menuItem = new JMenuItem("New menu item");
-		mnEdit.add(menuItem);
+		JMenuItem mntmPaste = new JMenuItem("Paste (Ctrl + V)");
+		mnEdit.add(mntmPaste);
 		
 		JMenu mnHelp = new JMenu("Help");
 		menuBar.add(mnHelp);
+		
+		JMenuItem mntmAbout = new JMenuItem("About");
+		mnHelp.add(mntmAbout);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
