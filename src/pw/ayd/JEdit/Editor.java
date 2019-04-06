@@ -9,22 +9,16 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.JTextArea;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JScrollBar;
 
 public class Editor extends JFrame implements ActionListener {
 
-	JTextArea textarea;
-	JPanel contentPane;
-	
 	/**
 	 * 
 	 */
-	//private static final long serialVersionUID = 1L;
-	//private JPanel contentPane;
+	private static final long serialVersionUID = 1L;
+	JTextArea textArea;
+	JFrame frame;
 
 	/**
 	 * Launch the application.
@@ -33,9 +27,8 @@ public class Editor extends JFrame implements ActionListener {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Editor frame = new Editor();
-					frame.setVisible(true);
-				
+					Editor window = new Editor();
+					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -44,17 +37,28 @@ public class Editor extends JFrame implements ActionListener {
 	}
 
 	/**
-	 * Create the frame.
+	 * Create the application.
 	 */
 	public Editor() {
+		initialize();
+	}
+
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize() {
 		
-		setTitle("JEdit");
+		frame = new JFrame();
+		frame.setBounds(100, 100, 450, 300);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 500, 650);
+		frame.setTitle("JEdit");
+		
+		JTextArea textArea = new JTextArea();
+		frame.getContentPane().add(textArea, BorderLayout.CENTER);
 		
 		JMenuBar menuBar = new JMenuBar();
-		setJMenuBar(menuBar);
+		frame.setJMenuBar(menuBar);
 		
 		JMenu mnFile = new JMenu("File");
 		menuBar.add(mnFile);
@@ -74,15 +78,15 @@ public class Editor extends JFrame implements ActionListener {
 		JMenu mnEdit = new JMenu("Edit");
 		menuBar.add(mnEdit);
 		
-		JMenuItem mntmCopy = new JMenuItem("Copy (Ctrl + C)");
-		mntmCopy.addActionListener(this);
-		mnEdit.add(mntmCopy);
-		
-		JMenuItem mntmCut = new JMenuItem("Cut (Ctrl + X)");
+		JMenuItem mntmCut = new JMenuItem("Cut");
 		mntmCut.addActionListener(this);
 		mnEdit.add(mntmCut);
 		
-		JMenuItem mntmPaste = new JMenuItem("Paste (Ctrl + V)");
+		JMenuItem mntmCopy = new JMenuItem("Copy");
+		mntmCopy.addActionListener(this);
+		mnEdit.add(mntmCopy);
+		
+		JMenuItem mntmPaste = new JMenuItem("Paste");
 		mntmPaste.addActionListener(this);
 		mnEdit.add(mntmPaste);
 		
@@ -92,43 +96,26 @@ public class Editor extends JFrame implements ActionListener {
 		JMenuItem mntmAbout = new JMenuItem("About");
 		mntmAbout.addActionListener(this);
 		mnHelp.add(mntmAbout);
-		
-		
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setLayout(new BorderLayout(0, 0));
-		setContentPane(contentPane);
-		
-		JTextArea textArea = new JTextArea();
-		contentPane.add(textArea, BorderLayout.CENTER);
 	}
 
-
+	@Override
 	public void actionPerformed(ActionEvent e) {
 		
-		String s = e.getActionCommand();
+		String action = e.getActionCommand();
 		
-		if (s.equals("Copy (Ctrl + C)")) {
-			textarea.copy();
-			System.out.println("[ ! ] Copying");
-		} else if (s.equals("Cut (Ctrl + X)")) {
-			textarea.cut();
-			System.out.println("[ ! ] Cutting");
-		} else if (s.equals("Paste (Ctrl + V)")) {
-			textarea.paste();
-			System.out.println("[ ! ] Pasting");
-		} else if (s.equals("Open")) {
-						
-		} else if (s.equals("Print")) {
-			
-		} else if (s.equals("Save")) {
-			
-		} else if (s.equals("About")) {
-				JOptionPane.showMessageDialog(contentPane, "Eggs are not supposed to be green.");
+		if (action.equals("Cut")) {
+			textArea.cut();
+			System.out.println("cutting");
+		} else if (action.equals("Copy")) {
+			textArea.copy();
+			System.out.println("copying");
+		} else if (action.equals("Paste")) {
+			textArea.paste();
+			System.out.println("pasting");
+		} else {
+			System.out.println("what");
 		}
 		
 	}
-	
-	
 
 }
