@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.print.PrinterException;
 
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -50,12 +51,12 @@ public class Editor extends JFrame implements ActionListener {
 	private void initialize() {
 		
 		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
+		frame.setBounds(100, 100, 500, 650);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		frame.setTitle("JEdit");
 		
-		JTextArea textArea = new JTextArea();
+		textArea = new JTextArea();
 		frame.getContentPane().add(textArea, BorderLayout.CENTER);
 		
 		JMenuBar menuBar = new JMenuBar();
@@ -78,7 +79,7 @@ public class Editor extends JFrame implements ActionListener {
 		
 		JMenu mnEdit = new JMenu("Edit");
 		menuBar.add(mnEdit);
-		
+
 		JMenuItem mntmCut = new JMenuItem("Cut");
 		mntmCut.addActionListener(this);
 		mnEdit.add(mntmCut);
@@ -106,18 +107,23 @@ public class Editor extends JFrame implements ActionListener {
 		
 		if (action.equals("Cut")) {
 			textArea.cut();
-			System.out.println("cutting");
 		} else if (action.equals("Copy")) {
 			textArea.copy();
-			System.out.println("copying");
 		} else if (action.equals("Paste")) {
 			textArea.paste();
-			System.out.println("pasting");
 		} else if (action.equals("About")) {
 			JOptionPane.showMessageDialog(frame, "JEdit v0.0.1 \n A text editor made in Java by @Offence", "About JEdit", JOptionPane.INFORMATION_MESSAGE);
+		} else if (action.equals("Open")) {
+			//TODO
+		} else if (action.equals("Save")) {
+			//TODO
+		} else if (action.equals("Print")) {
+			try {
+				textArea.print();
+			} catch (PrinterException e1) {
+				e1.printStackTrace();
+			}
 		} else {
-			
-			//TODO Add 'Open', 'Save', 'Print'
 			
 		}
 		
