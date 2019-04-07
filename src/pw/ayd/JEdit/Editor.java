@@ -20,6 +20,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.UIManager;
 
@@ -31,6 +32,7 @@ public class Editor extends JFrame implements ActionListener {
 	private static final long serialVersionUID = 1L;
 	JTextArea textArea;
 	JFrame frame;
+	JScrollPane scroll;
 	JMenuItem mntmSave;
 	JMenuItem mntmSaveAs;
 	File projectFile;
@@ -67,15 +69,15 @@ public class Editor extends JFrame implements ActionListener {
 
 		frame = new JFrame();
 		frame.setBounds(100, 100, 500, 650);
+		frame.setTitle("Untitled Document | JEdit");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		URL iconURL = getClass().getResource("/pw/ayd/JEdit/JEditIcon.png");
 		ImageIcon icon = new ImageIcon(iconURL);
 		frame.setIconImage(icon.getImage());
 
-		frame.setTitle("Untitled Document | JEdit");
-
 		textArea = new JTextArea();
+
 		frame.getContentPane().add(textArea, BorderLayout.CENTER);
 
 		JMenuBar menuBar = new JMenuBar();
