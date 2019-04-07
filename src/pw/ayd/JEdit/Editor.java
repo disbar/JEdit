@@ -30,7 +30,7 @@ public class Editor extends JFrame implements ActionListener {
 	JFrame frame;
 	JMenuItem mntmSave;
 	JMenuItem mntmSaveAs;
-	
+	File projectFile;
 	Boolean projectOpened = false;
 
 	/**
@@ -170,10 +170,30 @@ public class Editor extends JFrame implements ActionListener {
 				
 				frame.setTitle(saveFile.getName() + " | JEdit");
 				projectOpened = true;
+				projectFile = saveFile;
 			}
 			
 		} else if (action.equals("Save")) {
-			//TODO
+			
+			String saveText = textArea.getText();
+			
+			try {
+				
+				FileWriter fileWrite = new FileWriter(projectFile, false);
+				BufferedWriter bufferedWrite = new BufferedWriter(fileWrite);
+				
+				bufferedWrite.write(saveText);
+				bufferedWrite.close();
+				
+			} catch (IOException e1) {
+				
+				e1.printStackTrace();
+				
+			}
+			
+			frame.setTitle(projectFile.getName() + " | JEdit");
+			projectOpened = true;
+			
 		} else if (action.equals("Print")) {
 			try {
 				textArea.print();
