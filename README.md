@@ -4,4 +4,5 @@
 
 ### Things to do
 - [x] Make the GUI
-- [ ] Add all the functions
+- [x] Add all the functions
+- [ ] Add Preferences tab
