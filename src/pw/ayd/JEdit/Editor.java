@@ -5,13 +5,19 @@ import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.print.PrinterException;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
+
 
 public class Editor extends JFrame implements ActionListener {
 
@@ -54,7 +60,7 @@ public class Editor extends JFrame implements ActionListener {
 		frame.setBounds(100, 100, 500, 650);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		frame.setTitle("JEdit");
+		frame.setTitle("Untitled Document | JEdit");
 		
 		textArea = new JTextArea();
 		frame.getContentPane().add(textArea, BorderLayout.CENTER);
@@ -113,6 +119,11 @@ public class Editor extends JFrame implements ActionListener {
 			textArea.cut();
 		} else if (action.equals("Copy")) {
 			textArea.copy();
+
+		} else if (action.equals("New File")) {
+			textArea.setText("");
+			frame.setTitle("Untitled Document | JEdit");
+
 		} else if (action.equals("Paste")) {
 			textArea.paste();
 		} else if (action.equals("About")) {
@@ -121,6 +132,34 @@ public class Editor extends JFrame implements ActionListener {
 			//TODO
 		} else if (action.equals("Save")) {
 			//TODO
+			
+			String saveText = textArea.getText();
+			
+			JFileChooser saveChooser = new JFileChooser("c:");
+			int invokeChooser = saveChooser.showSaveDialog(null);
+			
+			if (invokeChooser == JFileChooser.APPROVE_OPTION) {
+				
+				File saveFile = new File(saveChooser.getSelectedFile().getAbsolutePath());
+				
+				try {
+					
+					FileWriter fileWrite = new FileWriter(saveFile, false);
+					BufferedWriter bufferedWrite = new BufferedWriter(fileWrite);
+					
+					bufferedWrite.write(saveText);
+					bufferedWrite.close();
+					
+				} catch (IOException e1) {
+					
+					e1.printStackTrace();
+					
+				}
+				
+				frame.setTitle(saveFile.getName() + " | JEdit");
+				
+			}
+			
 		} else if (action.equals("Print")) {
 			try {
 				textArea.print();
