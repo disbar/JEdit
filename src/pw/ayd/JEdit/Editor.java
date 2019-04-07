@@ -5,8 +5,10 @@ import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.print.PrinterException;
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -142,6 +144,30 @@ public class Editor extends JFrame implements ActionListener {
 			JOptionPane.showMessageDialog(frame, "JEdit v0.0.1 \n A text editor made in Java by @Offence", "About JEdit", JOptionPane.INFORMATION_MESSAGE);
 		} else if (action.equals("Open")) {
 			//TODO
+			
+			JFileChooser openChooser = new JFileChooser("c:");
+			int invokeOChooser = openChooser.showOpenDialog(null);
+			
+			if (invokeOChooser == JFileChooser.APPROVE_OPTION) {
+				File openFile = new File(openChooser.getSelectedFile().getAbsolutePath());
+				
+				BufferedReader br;
+				try {
+					br = new BufferedReader(new FileReader(openFile));
+					String st;
+					String addToFile = "";
+					  while ((st = br.readLine()) != null) 
+					    addToFile = addToFile + st + "\n";
+					  textArea.setText(addToFile);
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}  
+				
+				frame.setTitle(openFile.getName() + " | JEdit");
+				projectOpened = true;
+			}
+			
 		} else if (action.equals("Save As")) {
 			
 			String saveText = textArea.getText();
