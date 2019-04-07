@@ -143,7 +143,6 @@ public class Editor extends JFrame implements ActionListener {
 		} else if (action.equals("Open")) {
 			//TODO
 		} else if (action.equals("Save As")) {
-			//TODO
 			
 			String saveText = textArea.getText();
 			
