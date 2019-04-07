@@ -17,6 +17,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
+import javax.swing.UIManager;
 
 
 public class Editor extends JFrame implements ActionListener {
@@ -27,6 +28,10 @@ public class Editor extends JFrame implements ActionListener {
 	private static final long serialVersionUID = 1L;
 	JTextArea textArea;
 	JFrame frame;
+	JMenuItem mntmSave;
+	JMenuItem mntmSaveAs;
+	
+	Boolean projectOpened = false;
 
 	/**
 	 * Launch the application.
@@ -36,6 +41,7 @@ public class Editor extends JFrame implements ActionListener {
 			public void run() {
 				try {
 					Editor window = new Editor();
+					UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -75,13 +81,18 @@ public class Editor extends JFrame implements ActionListener {
 		mntmOpen.addActionListener(this);
 		mnFile.add(mntmOpen);
 		
-		JMenuItem mntmNew = new JMenuItem("New");
+		JMenuItem mntmNew = new JMenuItem("New File");
 		mntmNew.addActionListener(this);
 		mnFile.add(mntmNew);
 		
-		JMenuItem mntmSave = new JMenuItem("Save");
+		mntmSave = new JMenuItem("Save");
 		mntmSave.addActionListener(this);
 		mnFile.add(mntmSave);
+		mntmSave.setEnabled(false);
+		
+		mntmSaveAs = new JMenuItem("Save As");
+		mntmSaveAs.addActionListener(this);
+		mnFile.add(mntmSaveAs);
 		
 		JMenuItem mntmPrint = new JMenuItem("Print");
 		mntmPrint.addActionListener(this);
@@ -108,10 +119,12 @@ public class Editor extends JFrame implements ActionListener {
 		JMenuItem mntmAbout = new JMenuItem("About");
 		mntmAbout.addActionListener(this);
 		mnHelp.add(mntmAbout);
+		
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+
 		
 		String action = e.getActionCommand();
 		
@@ -119,18 +132,17 @@ public class Editor extends JFrame implements ActionListener {
 			textArea.cut();
 		} else if (action.equals("Copy")) {
 			textArea.copy();
-
 		} else if (action.equals("New File")) {
 			textArea.setText("");
 			frame.setTitle("Untitled Document | JEdit");
-
+			projectOpened = false;
 		} else if (action.equals("Paste")) {
 			textArea.paste();
 		} else if (action.equals("About")) {
 			JOptionPane.showMessageDialog(frame, "JEdit v0.0.1 \n A text editor made in Java by @Offence", "About JEdit", JOptionPane.INFORMATION_MESSAGE);
 		} else if (action.equals("Open")) {
 			//TODO
-		} else if (action.equals("Save")) {
+		} else if (action.equals("Save As")) {
 			//TODO
 			
 			String saveText = textArea.getText();
@@ -157,9 +169,11 @@ public class Editor extends JFrame implements ActionListener {
 				}
 				
 				frame.setTitle(saveFile.getName() + " | JEdit");
-				
+				projectOpened = true;
 			}
 			
+		} else if (action.equals("Save")) {
+			//TODO
 		} else if (action.equals("Print")) {
 			try {
 				textArea.print();
@@ -170,6 +184,11 @@ public class Editor extends JFrame implements ActionListener {
 			JOptionPane.showMessageDialog(frame, "Unknown function", "ERROR", JOptionPane.ERROR_MESSAGE);
 		}
 		
+		if (!projectOpened) {
+			mntmSave.setEnabled(false);
+		} else {
+			mntmSave.setEnabled(true);
+		}
 	}
 
 }
