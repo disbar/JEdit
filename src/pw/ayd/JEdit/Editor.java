@@ -69,7 +69,7 @@ public class Editor extends JFrame implements ActionListener {
 		mntmOpen.addActionListener(this);
 		mnFile.add(mntmOpen);
 		
-		JMenuItem mntmNew = new JMenuItem("New");
+		JMenuItem mntmNew = new JMenuItem("New File");
 		mntmNew.addActionListener(this);
 		mnFile.add(mntmNew);
 		
@@ -113,6 +113,8 @@ public class Editor extends JFrame implements ActionListener {
 			textArea.cut();
 		} else if (action.equals("Copy")) {
 			textArea.copy();
+		} else if (action.equals("New File")) {
+			textArea.setText("");
 		} else if (action.equals("Paste")) {
 			textArea.paste();
 		} else if (action.equals("About")) {
