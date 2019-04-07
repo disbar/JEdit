@@ -69,6 +69,10 @@ public class Editor extends JFrame implements ActionListener {
 		mntmOpen.addActionListener(this);
 		mnFile.add(mntmOpen);
 		
+		JMenuItem mntmNew = new JMenuItem("New");
+		mntmNew.addActionListener(this);
+		mnFile.add(mntmNew);
+		
 		JMenuItem mntmSave = new JMenuItem("Save");
 		mntmSave.addActionListener(this);
 		mnFile.add(mntmSave);
@@ -124,7 +128,7 @@ public class Editor extends JFrame implements ActionListener {
 				e1.printStackTrace();
 			}
 		} else {
-			
+			JOptionPane.showMessageDialog(frame, "Unknown function", "ERROR", JOptionPane.ERROR_MESSAGE);
 		}
 		
 	}
