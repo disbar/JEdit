@@ -11,7 +11,9 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.net.URL;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -68,6 +70,11 @@ public class Editor extends JFrame implements ActionListener {
 		frame.setBounds(100, 100, 500, 650);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
+		URL iconURL = getClass().getResource("/pw/ayd/JEdit/JEditIcon.png");
+		// iconURL is null when not found
+		ImageIcon icon = new ImageIcon(iconURL);
+		frame.setIconImage(icon.getImage());
+				
 		frame.setTitle("Untitled Document | JEdit");
 		
 		textArea = new JTextArea();
